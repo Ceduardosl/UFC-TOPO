@@ -97,7 +97,7 @@ class Ui_MainWindow(object):
 
         self.dir_raster_line = QtWidgets.QLineEdit(self.centralwidget)
         self.dir_raster_line.setGeometry(QtCore.QRect(10, 200, 611, 20))
-        self.dir_raster_line.setText("")
+        self.dir_raster_line.setText("C:/UFC-TOPO")
         self.dir_raster_line.setObjectName("dir_raster_line")
         self.dir_raster_button = QtWidgets.QPushButton(self.centralwidget)
         self.dir_raster_button.setGeometry(QtCore.QRect(630, 200, 75, 20))
@@ -112,35 +112,35 @@ class Ui_MainWindow(object):
         self.dir_xyz_label.setGeometry(QtCore.QRect(10, 250, 221, 16))
         self.dir_xyz_label.setObjectName("dir_xyz_label")
         self.dir_xyz_line = QtWidgets.QLineEdit(self.centralwidget)
-        self.dir_xyz_line.setEnabled(False)
+        self.dir_xyz_line.setEnabled(True)
         self.dir_xyz_line.setGeometry(QtCore.QRect(10, 270, 611, 20))
-        self.dir_xyz_line.setText("")
+        self.dir_xyz_line.setText("C:/UFC-TOPO/PontoCota.txt")
         self.dir_xyz_line.setObjectName("dir_xyz_line")
         self.dir_xyz_button = QtWidgets.QPushButton(self.centralwidget)
         self.dir_xyz_button.setGeometry(QtCore.QRect(630, 270, 75, 20))
         self.dir_xyz_button.setObjectName("dir_xyz_button")
-        self.dir_xyz_button.setEnabled(False)
+        self.dir_xyz_button.setEnabled(True)
         self.dir_xyz_button.clicked.connect(self.buscar_dir_xyz)#Função adiconada
 
         self.dir_dxf_label = QtWidgets.QLabel(self.centralwidget)
         self.dir_dxf_label.setGeometry(QtCore.QRect(10, 360, 251, 16))
         self.dir_dxf_label.setObjectName("dir_dxf_label")
         self.dir_dxf_line = QtWidgets.QLineEdit(self.centralwidget)
-        self.dir_dxf_line.setEnabled(False)
+        self.dir_dxf_line.setEnabled(True)
         self.dir_dxf_line.setGeometry(QtCore.QRect(10, 380, 611, 20))
-        self.dir_dxf_line.setText("")
+        self.dir_dxf_line.setText("C:/UFC-TOPO/Curva_de_Nível.dxf")
         self.dir_dxf_line.setObjectName("dir_dxf_line")
         self.dir_dxf_button = QtWidgets.QPushButton(self.centralwidget)
         self.dir_dxf_button.setGeometry(QtCore.QRect(630, 380, 75, 20))
         self.dir_dxf_button.setObjectName("dir_dxf_button")
-        self.dir_dxf_button.setEnabled(False)
+        self.dir_dxf_button.setEnabled(True)
         self.dir_dxf_button.clicked.connect(self.buscar_dir_dxf)#Função adicionada
 
         self.curva_intervalo_label = QtWidgets.QLabel(self.centralwidget)
         self.curva_intervalo_label.setGeometry(QtCore.QRect(110, 330, 331, 16))
         self.curva_intervalo_label.setObjectName("curva_intervalo_label")
         self.curva_intervalo_line = QtWidgets.QLineEdit(self.centralwidget)
-        self.curva_intervalo_line.setEnabled(False)
+        self.curva_intervalo_line.setEnabled(True)
         self.curva_intervalo_line.setGeometry(QtCore.QRect(10, 330, 90, 20))
         self.curva_intervalo_line.setObjectName("curva_intervalo_line")
         self.exec_button = QtWidgets.QPushButton(self.centralwidget)
@@ -163,11 +163,13 @@ class Ui_MainWindow(object):
         self.check_xyz = QtWidgets.QCheckBox(self.centralwidget)
         self.check_xyz.setGeometry(QtCore.QRect(10, 230, 211, 17))
         self.check_xyz.setObjectName("check_xyz")
+        self.check_xyz.click()
         self.check_xyz.stateChanged.connect(self.ativar_xyz)#Função Adicionada
 
         self.check_curva = QtWidgets.QCheckBox(self.centralwidget)
         self.check_curva.setGeometry(QtCore.QRect(10, 300, 231, 17))
         self.check_curva.setObjectName("check_curva")
+        self.check_curva.click()
         self.check_curva.stateChanged.connect(self.ativar_dxf)#Função Adicionada
 
         MainWindow.setCentralWidget(self.centralwidget)
@@ -228,7 +230,7 @@ class Ui_MainWindow(object):
         else:
             self.dir_xyz_line.setEnabled(False)
             self.dir_xyz_button.setEnabled(False)
-            self.dir_xyz_line.setText("")
+
 
     def ativar_dxf(self):
         if self.check_curva.isChecked():
@@ -240,23 +242,22 @@ class Ui_MainWindow(object):
             self.dir_dxf_line.setEnabled(False)
             self.dir_dxf_button.setEnabled(False)
             self.curva_intervalo_line.setEnabled(False)
-            self.curva_intervalo_line.setText("")
-            self.dir_dxf_line.setText("")
+
 
     def buscar_shp(self):
-        file_name = QFileDialog.getOpenFileName(None, "Buscar Shape", "C:/Users", "Shapefile (*.shp)")
+        file_name = QFileDialog.getOpenFileName(None, "Buscar Shape", "C:/UFC/UFC11/output_files", "Shapefile (*.shp)")
         self.dir_shp_line.setText(file_name[0])
 
     def buscar_dir_raster(self):
-        dir_name = QFileDialog.getExistingDirectory(None, "Diretório Raster", "C:/Users")
+        dir_name = QFileDialog.getExistingDirectory(None, "Diretório Raster", "C:/UFC-TOPO")
         self.dir_raster_line.setText(dir_name)
 
     def buscar_dir_xyz(self):
-        dir_name = QFileDialog.getExistingDirectory(None, "Diretório PontoCota (x, y, z)", "C:/Users")
+        dir_name = QFileDialog.getExistingDirectory(None, "Diretório PontoCota (x, y, z)", "C:/UFC-TOPO")
         self.dir_xyz_line.setText(dir_name+"/PontoCota.txt")
 
     def buscar_dir_dxf(self):
-        dir_name = QFileDialog.getExistingDirectory(None, "Diretório .dxf", "C:/Users")
+        dir_name = QFileDialog.getExistingDirectory(None, "Diretório .dxf", "C:/UFC-TOPO")
         self.dir_dxf_line.setText(dir_name+"/Curva_de_Nível.dxf")
 
 
@@ -274,7 +275,8 @@ class Ui_MainWindow(object):
             dir_shp = self.dir_shp_line.text()
             coords = None
             proj = None
-
+        #dir_raster onde será criada a pasta SRTM e baixado os rasters
+        #path_raster dir_raster + SRTM
         dir_raster = self.dir_raster_line.text()
         path_raster = Download_Topodata(dir_shp, read_shp, coords, proj, dir_raster)
         Descompactar_zips(path_raster)
@@ -289,11 +291,13 @@ class Ui_MainWindow(object):
             extract_xyz(dir_output_utm, dir_shp, dir_output_csv, read_shp, coords, proj)
             if self.check_curva.isChecked():
                 if self.curva_intervalo_line.text() == "":
+                    print("Distância entre as curvas de nível = 1 metro (Default)")
                     delta_z = 1
                 else:
                     delta_z = float(self.curva_intervalo_line.text())
                 dir_output_dxf = self.dir_dxf_line.text()
                 extract_curves(dir_output_csv, dir_output_dxf, delta_z)
+        exlcuir_raster(path_raster)
         msg = QMessageBox()
         msg.setWindowTitle("UFC-TOPO")
         msg.setText("Finalizado!")
@@ -484,6 +488,9 @@ def mask_raster(dir_raster, dir_output_mask, dir_shp, read_shp, coords, proj):
 
 
 def extract_xyz(dir_raster, dir_shp, dir_output_csv, read_shp, coords, proj):
+    #Refaço o Mask aqui, pois preciso de informações que preciso dentro da variáveil out_mask
+    #Não consegui fazer puxando do raster Mask_UTM
+    #Outro ponto, é que preciso de funções diferentes, pois caso não queira o arquivo PontoCota, posso obter só o raster recortado
     dir_output_csv = dir_output_csv
     raster = rio.open(dir_raster)
     if read_shp == True:
@@ -543,6 +550,12 @@ def extract_curves(dir_output_csv,  dir_output_dxf, delta_z):
                     print("Segmento com um ponto!....")
     print("Salvando Arquivo!")
     doc.saveas(dir_output_dxf)
+
+def exlcuir_raster(dir_raster):
+    list_raster = glob(dir_raster + "/" + "*.tif")
+    for i in list_raster:
+        if i != "{}\mask_UTM.tif".format(dir_raster):#Deixar apenas o mask_UTM
+            os.remove(i)
 
 if __name__ == "__main__":
     import sys
