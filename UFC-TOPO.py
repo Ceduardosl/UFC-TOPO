@@ -3,9 +3,14 @@ Script para:
 Download dos arquivos .tif da base de dados do Topodata/INPE com em uma quadrícula de referência
 Extração das elevações de cada ponto de grade do arquivo .tif baixado
 Geração das curvas de nível com base na elevação de cada ponto de grade
+'''
+
+'''
 Autor: Carlos Eduardo Sousa Lima
-Mestrando em Engenharia Civil (Recursos Hídricos)
 Departamento de Engenharia Hidráulica e Ambiental/ Universidade Federal do Ceará (DEHA/UFC)
+Doutorando em Engenharia Civil (Recursos Hídricos) - DEHA/UFC
+Mestre em Engenharia Civil (Recursos Hídricos) - DEHA/UFC
+Engenheiro Civil com ênfase em Meio Ambiente - Universidade Estadual Vale do Acaraú (UVA)
 '''
 '''
 Padrão URL "http://www.dsr.inpe.br/topodata/data/geotiff/"
