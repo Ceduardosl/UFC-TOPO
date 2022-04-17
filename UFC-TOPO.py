@@ -46,7 +46,7 @@ from PyQt5.QtWidgets import QDialog, QApplication, QFileDialog, QMessageBox
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(712, 488)
+        MainWindow.resize(712, 506)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.long_esq_line = QtWidgets.QLineEdit(self.centralwidget)
@@ -128,18 +128,27 @@ class Ui_MainWindow(object):
         self.dir_xyz_button.clicked.connect(self.buscar_dir_xyz)#Função adiconada
 
         self.dir_dxf_label = QtWidgets.QLabel(self.centralwidget)
-        self.dir_dxf_label.setGeometry(QtCore.QRect(10, 360, 251, 16))
+        self.dir_dxf_label.setGeometry(QtCore.QRect(10, 400, 251, 16))
         self.dir_dxf_label.setObjectName("dir_dxf_label")
         self.dir_dxf_line = QtWidgets.QLineEdit(self.centralwidget)
         self.dir_dxf_line.setEnabled(True)
-        self.dir_dxf_line.setGeometry(QtCore.QRect(10, 380, 611, 20))
+        self.dir_dxf_line.setGeometry(QtCore.QRect(10, 420, 611, 20))
         self.dir_dxf_line.setText("C:/UFC-TOPO/Curva_de_Nível.dxf")
         self.dir_dxf_line.setObjectName("dir_dxf_line")
         self.dir_dxf_button = QtWidgets.QPushButton(self.centralwidget)
-        self.dir_dxf_button.setGeometry(QtCore.QRect(630, 380, 75, 20))
+        self.dir_dxf_button.setGeometry(QtCore.QRect(630, 420, 75, 20))
         self.dir_dxf_button.setObjectName("dir_dxf_button")
         self.dir_dxf_button.setEnabled(True)
         self.dir_dxf_button.clicked.connect(self.buscar_dir_dxf)#Função adicionada
+
+        self.Scale_Curva_Nivel_Line = QtWidgets.QLineEdit(self.centralwidget)
+        self.Scale_Curva_Nivel_Line.setObjectName("Scale_Curva_Nivel_Line")
+        self.Scale_Curva_Nivel_Line.setEnabled(True)
+        self.Scale_Curva_Nivel_Line.setGeometry(QtCore.QRect(10, 370, 90, 20))
+        self.Scale_Curva_Nivel_Line.setText("1.2")
+        self.Scale_Curva_Nivel_Label = QtWidgets.QLabel(self.centralwidget)
+        self.Scale_Curva_Nivel_Label.setObjectName("Scale_Curva_Nivel_Label")
+        self.Scale_Curva_Nivel_Label.setGeometry(QtCore.QRect(110, 370, 331, 16))
 
         self.curva_intervalo_label = QtWidgets.QLabel(self.centralwidget)
         self.curva_intervalo_label.setGeometry(QtCore.QRect(110, 330, 331, 16))
@@ -148,8 +157,9 @@ class Ui_MainWindow(object):
         self.curva_intervalo_line.setEnabled(True)
         self.curva_intervalo_line.setGeometry(QtCore.QRect(10, 330, 90, 20))
         self.curva_intervalo_line.setObjectName("curva_intervalo_line")
+        self.curva_intervalo_line.setText("1")
         self.exec_button = QtWidgets.QPushButton(self.centralwidget)
-        self.exec_button.setGeometry(QtCore.QRect(10, 420, 141, 41))
+        self.exec_button.setGeometry(QtCore.QRect(10, 450, 141, 41))
         font = QtGui.QFont()
         font.setBold(True)
         font.setUnderline(False)
@@ -201,12 +211,13 @@ class Ui_MainWindow(object):
         self.dir_xyz_button.setText(_translate("MainWindow", "Buscar"))
         self.dir_dxf_label.setText(_translate("MainWindow", "Diretório de saída do arquivo Curva_de_Nível.dxf:"))
         self.dir_dxf_button.setText(_translate("MainWindow", "Buscar"))
-        self.curva_intervalo_label.setText(_translate("MainWindow", "Variação de elevação entre as curvas de nívell (Default = 1 metro)"))
+        self.curva_intervalo_label.setText(_translate("MainWindow", "Variação de elevação entre as curvas de nível (Default = 1 metro)"))
         self.exec_button.setText(_translate("MainWindow", "Executar UFC-TOPO"))
         self.obs_label.setText(_translate("MainWindow", "Caso queira, ou não haja shapefile, informe as coordenadas da quadrícula desejada:"))
         self.check_coord.setText(_translate("MainWindow", "Informar Coordenadas (UTM):"))
         self.check_xyz.setText(_translate("MainWindow", "Gerar arquivo PontoCota.txt (X, Y, Z)"))
         self.check_curva.setText(_translate("MainWindow", "Gerar Curvas de Nível em um arquivo .dxf:"))
+        self.Scale_Curva_Nivel_Label.setText(_translate("MainWindow", "Fator de escala aplicado na extração das curvas de nível"))
 
     def ativar_coord(self):
         if self.check_coord.isChecked():
@@ -242,11 +253,14 @@ class Ui_MainWindow(object):
             self.dir_dxf_line.setEnabled(True)
             self.curva_intervalo_line.setEnabled(True)
             self.dir_dxf_button.setEnabled(True)
+            self.Scale_Curva_Nivel_Line.setEnabled(True)
+
         else:
             self.dir_dxf_line.setEnabled(False)
             self.dir_dxf_line.setEnabled(False)
             self.dir_dxf_button.setEnabled(False)
             self.curva_intervalo_line.setEnabled(False)
+            self.Scale_Curva_Nivel_Line.setEnabled(False)
 
 
     def buscar_shp(self):
