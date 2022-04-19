@@ -46,9 +46,28 @@ from PyQt5.QtWidgets import QDialog, QApplication, QFileDialog, QMessageBox
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(712, 506)
+        MainWindow.resize(712, 530)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
+
+        #############---------------------############-------------------------#########        
+        self.dir_shp_line = QtWidgets.QLineEdit(self.centralwidget)
+        self.dir_shp_line.setGeometry(QtCore.QRect(10, 30, 611, 20))
+        self.dir_shp_line.setText("")
+        self.dir_shp_line.setObjectName("dir_shp_line")
+        self.dir_shp_button = QtWidgets.QPushButton(self.centralwidget)
+        self.dir_shp_button.setGeometry(QtCore.QRect(630, 30, 75, 20))
+        self.dir_shp_button.setObjectName("dir_shp_button")
+        self.dir_shp_button.clicked.connect(self.buscar_shp)#Função adicionada
+        self.check_coord = QtWidgets.QCheckBox(self.centralwidget)
+        self.check_coord.setGeometry(QtCore.QRect(10, 90, 161, 17))
+        self.check_coord.setObjectName("check_coord")
+        self.check_coord.stateChanged.connect(self.ativar_coord)#Função Adicionada
+
+        #############---------------------############-------------------------#########        
+        self.obs_label = QtWidgets.QLabel(self.centralwidget)
+        self.obs_label.setGeometry(QtCore.QRect(10, 60, 421, 16))
+        self.obs_label.setObjectName("obs_label")
         self.long_esq_line = QtWidgets.QLineEdit(self.centralwidget)
         self.long_esq_line.setEnabled(False)
         self.long_esq_line.setGeometry(QtCore.QRect(10, 120, 90, 20))
@@ -87,79 +106,94 @@ class Ui_MainWindow(object):
         self.proj_line.setGeometry(QtCore.QRect(180, 90, 90, 20))
         self.proj_line.setText("")
         self.proj_line.setObjectName("proj_line")
-        self.dir_shp_line = QtWidgets.QLineEdit(self.centralwidget)
-        self.dir_shp_line.setGeometry(QtCore.QRect(10, 30, 611, 20))
-        self.dir_shp_line.setText("")
-        self.dir_shp_line.setObjectName("dir_shp_line")
-        self.dir_shp_button = QtWidgets.QPushButton(self.centralwidget)
-        self.dir_shp_button.setGeometry(QtCore.QRect(630, 30, 75, 20))
-        self.dir_shp_button.setObjectName("dir_shp_button")
-        self.dir_shp_button.clicked.connect(self.buscar_shp)#Função adicionada
 
+        #############---------------------############-------------------------#########        
         self.dir_shp_label = QtWidgets.QLabel(self.centralwidget)
         self.dir_shp_label.setGeometry(QtCore.QRect(10, 10, 161, 16))
         self.dir_shp_label.setObjectName("dir_shp_label")
 
+        #############---------------------############-------------------------#########        
+        self.Scale_Horizontal_Line = QtWidgets.QLineEdit(self.centralwidget)
+        self.Scale_Horizontal_Line.setObjectName("Scale_Horizontal_Line")
+        self.Scale_Horizontal_Line.setEnabled(True)
+        self.Scale_Horizontal_Line.setGeometry(QtCore.QRect(10, 200, 90, 20))
+        self.Scale_Horizontal_Line.setText("1.2")
+        self.Scale_Horizontal_Label = QtWidgets.QLabel(self.centralwidget)
+        self.Scale_Horizontal_Label.setObjectName("Scale_Horizontal_Label")
+        self.Scale_Horizontal_Label.setGeometry(QtCore.QRect(10, 180, 101, 16))
+        self.Scale_Vertical_Line = QtWidgets.QLineEdit(self.centralwidget)
+        self.Scale_Vertical_Line.setObjectName("Scale_Vertical_Line")
+        self.Scale_Vertical_Line.setEnabled(True)
+        self.Scale_Vertical_Line.setGeometry(QtCore.QRect(150, 200, 90, 20))
+        self.Scale_Vertical_Line.setText("1.2")
+        self.Scale_Vertical_Label = QtWidgets.QLabel(self.centralwidget)
+        self.Scale_Vertical_Label.setObjectName("Scale_Vertical_Label")
+        self.Scale_Vertical_Label.setGeometry(QtCore.QRect(150, 180, 101, 16))
+
+        #############---------------------############-------------------------#########        
         self.dir_raster_line = QtWidgets.QLineEdit(self.centralwidget)
-        self.dir_raster_line.setGeometry(QtCore.QRect(10, 200, 611, 20))
+        self.dir_raster_line.setGeometry(QtCore.QRect(10, 250, 611, 20))
         self.dir_raster_line.setText("C:/UFC-TOPO")
         self.dir_raster_line.setObjectName("dir_raster_line")
         self.dir_raster_button = QtWidgets.QPushButton(self.centralwidget)
-        self.dir_raster_button.setGeometry(QtCore.QRect(630, 200, 75, 20))
+        self.dir_raster_button.setGeometry(QtCore.QRect(630, 250, 75, 20))
         self.dir_raster_button.setObjectName("dir_raster_button")
         self.dir_raster_button.clicked.connect(self.buscar_dir_raster)#Função adicionada
-
         self.dir_raster_label = QtWidgets.QLabel(self.centralwidget)
-        self.dir_raster_label.setGeometry(QtCore.QRect(10, 180, 201, 16))
+        self.dir_raster_label.setGeometry(QtCore.QRect(10, 230, 201, 16))
         self.dir_raster_label.setObjectName("dir_raster_label")
 
-        self.dir_xyz_label = QtWidgets.QLabel(self.centralwidget)
-        self.dir_xyz_label.setGeometry(QtCore.QRect(10, 250, 221, 16))
-        self.dir_xyz_label.setObjectName("dir_xyz_label")
+        #############---------------------############-------------------------#########        
+        self.check_xyz = QtWidgets.QCheckBox(self.centralwidget)
+        self.check_xyz.setGeometry(QtCore.QRect(10, 280, 211, 17))
+        self.check_xyz.setObjectName("check_xyz")
+        self.check_xyz.click()
+        self.check_xyz.stateChanged.connect(self.ativar_xyz)#Função Adicionada
         self.dir_xyz_line = QtWidgets.QLineEdit(self.centralwidget)
-        self.dir_xyz_line.setEnabled(True)
-        self.dir_xyz_line.setGeometry(QtCore.QRect(10, 270, 611, 20))
+        self.dir_xyz_line.setGeometry(QtCore.QRect(10, 320, 611, 20))
         self.dir_xyz_line.setText("C:/UFC-TOPO/PontoCota.txt")
         self.dir_xyz_line.setObjectName("dir_xyz_line")
+        self.dir_xyz_line.setEnabled(True)
+        self.dir_xyz_label = QtWidgets.QLabel(self.centralwidget)
+        self.dir_xyz_label.setGeometry(QtCore.QRect(10, 300, 221, 16))
+        self.dir_xyz_label.setObjectName("dir_xyz_label")
         self.dir_xyz_button = QtWidgets.QPushButton(self.centralwidget)
-        self.dir_xyz_button.setGeometry(QtCore.QRect(630, 270, 75, 20))
+        self.dir_xyz_button.setGeometry(QtCore.QRect(630, 320, 75, 20))
         self.dir_xyz_button.setObjectName("dir_xyz_button")
         self.dir_xyz_button.setEnabled(True)
         self.dir_xyz_button.clicked.connect(self.buscar_dir_xyz)#Função adiconada
 
-        self.dir_dxf_label = QtWidgets.QLabel(self.centralwidget)
-        self.dir_dxf_label.setGeometry(QtCore.QRect(10, 400, 251, 16))
-        self.dir_dxf_label.setObjectName("dir_dxf_label")
+        #############---------------------############-------------------------#########
+        self.check_curva = QtWidgets.QCheckBox(self.centralwidget)
+        self.check_curva.setGeometry(QtCore.QRect(10, 350, 231, 17))
+        self.check_curva.setObjectName("check_curva")
+        self.check_curva.click()
+        self.check_curva.stateChanged.connect(self.ativar_dxf)#Função Adicionada
+        self.curva_intervalo_label = QtWidgets.QLabel(self.centralwidget)
+        self.curva_intervalo_label.setGeometry(QtCore.QRect(110, 380, 331, 16))
+        self.curva_intervalo_label.setObjectName("curva_intervalo_label")
+        self.curva_intervalo_line = QtWidgets.QLineEdit(self.centralwidget)
+        self.curva_intervalo_line.setEnabled(True)
+        self.curva_intervalo_line.setGeometry(QtCore.QRect(10, 380, 90, 20))
+        self.curva_intervalo_line.setObjectName("curva_intervalo_line")
+        self.curva_intervalo_line.setText("1")
         self.dir_dxf_line = QtWidgets.QLineEdit(self.centralwidget)
         self.dir_dxf_line.setEnabled(True)
-        self.dir_dxf_line.setGeometry(QtCore.QRect(10, 420, 611, 20))
+        self.dir_dxf_line.setGeometry(QtCore.QRect(10, 430, 611, 20))
         self.dir_dxf_line.setText("C:/UFC-TOPO/Curva_de_Nível.dxf")
         self.dir_dxf_line.setObjectName("dir_dxf_line")
+        self.dir_dxf_label = QtWidgets.QLabel(self.centralwidget)
+        self.dir_dxf_label.setGeometry(QtCore.QRect(10, 410, 251, 16))
+        self.dir_dxf_label.setObjectName("dir_dxf_label")
         self.dir_dxf_button = QtWidgets.QPushButton(self.centralwidget)
-        self.dir_dxf_button.setGeometry(QtCore.QRect(630, 420, 75, 20))
+        self.dir_dxf_button.setGeometry(QtCore.QRect(630, 320, 75, 20))
         self.dir_dxf_button.setObjectName("dir_dxf_button")
         self.dir_dxf_button.setEnabled(True)
         self.dir_dxf_button.clicked.connect(self.buscar_dir_dxf)#Função adicionada
 
-        self.Scale_Curva_Nivel_Line = QtWidgets.QLineEdit(self.centralwidget)
-        self.Scale_Curva_Nivel_Line.setObjectName("Scale_Curva_Nivel_Line")
-        self.Scale_Curva_Nivel_Line.setEnabled(True)
-        self.Scale_Curva_Nivel_Line.setGeometry(QtCore.QRect(10, 370, 90, 20))
-        self.Scale_Curva_Nivel_Line.setText("1.2")
-        self.Scale_Curva_Nivel_Label = QtWidgets.QLabel(self.centralwidget)
-        self.Scale_Curva_Nivel_Label.setObjectName("Scale_Curva_Nivel_Label")
-        self.Scale_Curva_Nivel_Label.setGeometry(QtCore.QRect(110, 370, 331, 16))
-
-        self.curva_intervalo_label = QtWidgets.QLabel(self.centralwidget)
-        self.curva_intervalo_label.setGeometry(QtCore.QRect(110, 330, 331, 16))
-        self.curva_intervalo_label.setObjectName("curva_intervalo_label")
-        self.curva_intervalo_line = QtWidgets.QLineEdit(self.centralwidget)
-        self.curva_intervalo_line.setEnabled(True)
-        self.curva_intervalo_line.setGeometry(QtCore.QRect(10, 330, 90, 20))
-        self.curva_intervalo_line.setObjectName("curva_intervalo_line")
-        self.curva_intervalo_line.setText("1")
+        #############---------------------############-------------------------#########        
         self.exec_button = QtWidgets.QPushButton(self.centralwidget)
-        self.exec_button.setGeometry(QtCore.QRect(10, 450, 141, 41))
+        self.exec_button.setGeometry(QtCore.QRect(10, 460, 141, 41))
         font = QtGui.QFont()
         font.setBold(True)
         font.setUnderline(False)
@@ -167,26 +201,8 @@ class Ui_MainWindow(object):
         self.exec_button.setFont(font)
         self.exec_button.setObjectName("exec_button")
         self.exec_button.clicked.connect(self.executar)#Função adicionada
-        self.obs_label = QtWidgets.QLabel(self.centralwidget)
-        self.obs_label.setGeometry(QtCore.QRect(10, 60, 421, 16))
-        self.obs_label.setObjectName("obs_label")
-        self.check_coord = QtWidgets.QCheckBox(self.centralwidget)
-        self.check_coord.setGeometry(QtCore.QRect(10, 90, 161, 17))
-        self.check_coord.setObjectName("check_coord")
-        self.check_coord.stateChanged.connect(self.ativar_coord)#Função Adicionada
 
-        self.check_xyz = QtWidgets.QCheckBox(self.centralwidget)
-        self.check_xyz.setGeometry(QtCore.QRect(10, 230, 211, 17))
-        self.check_xyz.setObjectName("check_xyz")
-        self.check_xyz.click()
-        self.check_xyz.stateChanged.connect(self.ativar_xyz)#Função Adicionada
-
-        self.check_curva = QtWidgets.QCheckBox(self.centralwidget)
-        self.check_curva.setGeometry(QtCore.QRect(10, 300, 231, 17))
-        self.check_curva.setObjectName("check_curva")
-        self.check_curva.click()
-        self.check_curva.stateChanged.connect(self.ativar_dxf)#Função Adicionada
-
+        #############---------------------############-------------------------#########        
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -217,7 +233,8 @@ class Ui_MainWindow(object):
         self.check_coord.setText(_translate("MainWindow", "Informar Coordenadas (UTM):"))
         self.check_xyz.setText(_translate("MainWindow", "Gerar arquivo PontoCota.txt (X, Y, Z)"))
         self.check_curva.setText(_translate("MainWindow", "Gerar Curvas de Nível em um arquivo .dxf:"))
-        self.Scale_Curva_Nivel_Label.setText(_translate("MainWindow", "Fator de escala aplicado na extração das curvas de nível"))
+        self.Scale_Horizontal_Label.setText(_translate("MainWindow", "Scale Horizontal:"))
+        self.Scale_Vertical_Label.setText(_translate("MainWindow", "Scale Vertical:"))
 
     def ativar_coord(self):
         if self.check_coord.isChecked():
@@ -253,14 +270,14 @@ class Ui_MainWindow(object):
             self.dir_dxf_line.setEnabled(True)
             self.curva_intervalo_line.setEnabled(True)
             self.dir_dxf_button.setEnabled(True)
-            self.Scale_Curva_Nivel_Line.setEnabled(True)
+            self.Scale_Horizontal_Line.setEnabled(True)
 
         else:
             self.dir_dxf_line.setEnabled(False)
             self.dir_dxf_line.setEnabled(False)
             self.dir_dxf_button.setEnabled(False)
             self.curva_intervalo_line.setEnabled(False)
-            self.Scale_Curva_Nivel_Line.setEnabled(False)
+            self.Scale_Horizontal_Line.setEnabled(False)
 
 
     def buscar_shp(self):
@@ -296,6 +313,7 @@ class Ui_MainWindow(object):
             proj = None
         #dir_raster onde será criada a pasta SRTM e baixado os rasters
         #path_raster dir_raster + SRTM
+        scale_factor = [float(self.Scale_Horizontal_Line.text()), float(self.Scale_Vertical_Line.text())]
         dir_raster = self.dir_raster_line.text()
         path_raster = Download_Topodata(dir_shp, read_shp, coords, proj, dir_raster)
         Descompactar_zips(path_raster)
@@ -304,18 +322,15 @@ class Ui_MainWindow(object):
         dir_output_utm = path_raster + "/merge_UTM.tif"
         project_rater(dir_output_merge, dir_output_utm, dir_shp, read_shp, proj)
         dir_output_mask = path_raster + "/mask_UTM.tif"
-        mask_raster(dir_output_utm, dir_output_mask, dir_shp, read_shp, coords, proj)
+        mask_raster(dir_output_utm, dir_output_mask, dir_shp, read_shp, coords, proj, scale_factor)
         if self.check_xyz.isChecked():
             dir_output_csv = self.dir_xyz_line.text()
-            extract_xyz(dir_output_utm, dir_shp, dir_output_csv, read_shp, coords, proj)
+            extract_xyz(dir_output_utm, dir_shp, dir_output_csv, read_shp, coords, proj, scale_factor)
             if self.check_curva.isChecked():
-                if self.curva_intervalo_line.text() == "":
-                    print("Distância entre as curvas de nível = 1 metro (Default)")
-                    delta_z = 1
-                else:
-                    delta_z = float(self.curva_intervalo_line.text())
+                delta_z = float(self.curva_intervalo_line.text())
                 dir_output_dxf = self.dir_dxf_line.text()
                 extract_curves(dir_output_csv, dir_output_dxf, delta_z)
+
         exlcuir_raster(path_raster)
         msg = QMessageBox()
         msg.setWindowTitle("UFC-TOPO")
@@ -473,13 +488,13 @@ def project_rater(dir_raster, dir_output_utm, dir_shp, read_shp, proj):
     return
 
 
-def mask_raster(dir_raster, dir_output_mask, dir_shp, read_shp, coords, proj):
+def mask_raster(dir_raster, dir_output_mask, dir_shp, read_shp, coords, proj, scale):
     #"crs": prj.crs.CRS.to_proj4(prj.CRS(raster.crs)) retorna a projeção como:
     #"+proj=longlat +datum=WGS84 +no_defs +type=crs". só funcionou esse formato no out_meta.upadate
     raster = rio.open(dir_raster)
     if read_shp == True:
         shp = gpd.read_file(dir_shp)
-        shp_clip = shp.envelope.scale(1.2, 1.2) #scale[scale_x, scale_y]
+        shp_clip = shp.envelope.scale(scale[0], scale[1]) #scale[scale_x, scale_y]
         raster_mask, out_mask = mask(raster, shp_clip.geometry, crop=True, filled=True, nodata=np.nan)
         out_meta = raster.meta.copy()
         out_meta.update({"driver": "GTiff",
@@ -491,7 +506,7 @@ def mask_raster(dir_raster, dir_output_mask, dir_shp, read_shp, coords, proj):
     else:
         bbox = box(coords[0], coords[1], coords[2], coords[3])
         gdf_bbox = gpd.GeoDataFrame({'geometry': bbox}, index=[0], crs=proj)
-        bbox_clip = gdf_bbox.envelope.scale(1.2,1.2) #scale[scale_x, scale_y]
+        bbox_clip = gdf_bbox.envelope.scale(scale[0], scale[1]) #scale[scale_x, scale_y]
         raster_mask, out_mask = mask(raster, bbox_clip.geometry, crop=True, filled=True, nodata=np.nan)
         out_meta = raster.meta.copy()
         out_meta.update({"driver": "GTiff",
@@ -506,7 +521,7 @@ def mask_raster(dir_raster, dir_output_mask, dir_shp, read_shp, coords, proj):
     return
 
 
-def extract_xyz(dir_raster, dir_shp, dir_output_csv, read_shp, coords, proj):
+def extract_xyz(dir_raster, dir_shp, dir_output_csv, read_shp, coords, proj, scale):
     #Refaço o Mask aqui, pois preciso de informações que preciso dentro da variáveil out_mask
     #Não consegui fazer puxando do raster Mask_UTM
     #Outro ponto, é que preciso de funções diferentes, pois caso não queira o arquivo PontoCota, posso obter só o raster recortado
@@ -514,12 +529,12 @@ def extract_xyz(dir_raster, dir_shp, dir_output_csv, read_shp, coords, proj):
     raster = rio.open(dir_raster)
     if read_shp == True:
         shp = gpd.read_file(dir_shp) #Lendo Shapefile
-        shp_clip = shp.envelope.scale(1.2, 1.2) #Fator de escala → scale[scale_x, scale_y]
+        shp_clip = shp.envelope.scale(scale[0], scale[1]) #Fator de escala → scale[scale_x, scale_y]
         raster_mask, out_mask = mask(raster, shp_clip.geometry, crop=True, filled=True, nodata=-999)
     else:
         bbox = box(coords[0], coords[1], coords[2], coords[3])
         gdf_bbox = gpd.GeoDataFrame({'geometry': bbox}, index=[0], crs=proj)
-        bbox_clip = gdf_bbox.envelope.scale(1.2,1.2) #scale[scale_x, scale_y]
+        bbox_clip = gdf_bbox.envelope.scale(scale[0], scale[1]) #scale[scale_x, scale_y]
         raster_mask, out_mask = mask(raster, bbox_clip.geometry, crop=True, filled=True, nodata=-999)
     data_elev = raster_mask[0]
     row, col = np.where(data_elev != -999)  #Linhas e colunas onde a elevação não é NaN
@@ -575,6 +590,7 @@ def exlcuir_raster(dir_raster):
     for i in list_raster:
         if i != "{}\mask_UTM.tif".format(dir_raster):#Deixar apenas o mask_UTM
             os.remove(i)
+
 
 if __name__ == "__main__":
     import sys
