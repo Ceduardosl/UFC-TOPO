@@ -186,7 +186,7 @@ class Ui_MainWindow(object):
         self.dir_dxf_label.setGeometry(QtCore.QRect(10, 410, 251, 16))
         self.dir_dxf_label.setObjectName("dir_dxf_label")
         self.dir_dxf_button = QtWidgets.QPushButton(self.centralwidget)
-        self.dir_dxf_button.setGeometry(QtCore.QRect(630, 320, 75, 20))
+        self.dir_dxf_button.setGeometry(QtCore.QRect(630, 430, 75, 20))
         self.dir_dxf_button.setObjectName("dir_dxf_button")
         self.dir_dxf_button.setEnabled(True)
         self.dir_dxf_button.clicked.connect(self.buscar_dir_dxf)#Função adicionada
