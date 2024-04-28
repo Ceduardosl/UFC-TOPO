@@ -296,9 +296,12 @@ class Ui_MainWindow(object):
         if self.check_getraster.isChecked():
             self.dir_getraster_label.setEnabled(False)
             self.dir_getraster_button.setEnabled(False)
+            self.dir_getraster_line.setText("")
+            self.dir_getraster_line.setEnabled(False)
         else:
             self.dir_getraster_label.setEnabled(True)
             self.dir_getraster_button.setEnabled(True)
+            self.dir_getraster_line.setEnabled(True)
 
     def ativar_xyz(self):
         if self.check_xyz.isChecked():
